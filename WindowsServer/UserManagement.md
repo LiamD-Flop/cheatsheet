@@ -19,3 +19,10 @@ Disable-ADUser -Identity <Name>
 ```powershell
 New-ADUser -Name <name> -AccountPassword(Read-Host -AsSecureString "Type password")
 ```
+
+#### Add all users from OU to a secure group
+```powershell
+ Get-ADUser -SearchBase '<DistinguishedName (without the CN part)>' -Filter * | ForEach-Object {Add-ADGroupMember -Identity '<secure group name>' -Members $_ }
+ ```
+
+ function prompt {"`n$(get-date) | PS [$Env:userdomain\\$Env:username@$Env:computername] `n$($PWD.ProviderPath) > "}
